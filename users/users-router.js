@@ -11,4 +11,18 @@ router.get('/', restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
+router.get('/logout', (req, res) => {
+  if(req.session) {
+    req.session.destroy(error => {
+      if (error) {
+        res.status(500).json({ message: "There was an error logging you out." });
+      } else {
+        res.status(200).json({ message: "Bye!" })
+      } 
+    });
+  } else {
+    res.status(200).json({ message: "This user is already logged out." })
+  }
+})
+
 module.exports = router;

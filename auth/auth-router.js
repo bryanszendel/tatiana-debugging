@@ -25,6 +25,8 @@ router.post('/login', (req, res) => {
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
+        //set some info on session here, before sending response
+        req.session.user = user;
         res.status(200).json({
           message: `Welcome ${user.username}!`,
         });

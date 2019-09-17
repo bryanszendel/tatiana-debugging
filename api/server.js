@@ -15,12 +15,12 @@ const sessionConfig = {
   name: 'pizzalover', //if we don't set this the default will be sid
   secret: 'keep it secret, keep it safe', //we use this to encrypt and decrypt the cookie
   cookie: {
-    maxAge: 1000 + 30, //means the cookie will be valid for 30 seconds, and will expire after that
+    maxAge: 1000 + 60, //means the cookie will be valid for 30 seconds, and will expire after that
     secure: false, //during development, this can be false. in production, should be true
     httpOnly: true, //this cookie cannot be accessed from Javascript. should always be true
   },
-  resave: false, 
-  saveOnInitialized: false, //GDPR laws against setting cookies automatically. this should only be true once a user opts in to let us use cookies
+  resave: false, //if the cookie hasn't changed, it should not be recreated; keep the one that was there
+  saveOnInitialized: true, //GDPR laws against setting cookies automatically. this should only be true once a user opts in to let us use cookies
 };
 
 server.use(helmet());
